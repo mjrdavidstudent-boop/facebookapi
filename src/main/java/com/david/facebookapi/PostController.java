@@ -10,7 +10,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
-@CrossOrigin(origins = "http://localhost:5173") // Allow React frontend
+// REMOVED: @CrossOrigin(origins = "http://localhost:5173")
+// The global CorsConfig now handles cross-origin requests.
 public class PostController {
 
     private final PostRepository postRepository;
@@ -52,7 +53,6 @@ public class PostController {
     }
 
     // Delete a post (Returns 204 No Content or 404 Not Found)
-    // IMPROVED: Uses existsById for efficiency before deleting.
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id) {
         if (postRepository.existsById(id)) {
